@@ -62,10 +62,13 @@
               </div>
             </div>
           </v-card-text>
-          <v-card-title class="justify-center mb-7">
+          <v-card-title class="justify-center">
             <div v-if="!loading">{{ getTitle }}</div>
             <div v-if="loading">{{ getConfigLoading.text }}</div>
           </v-card-title>
+          <v-card-text>
+            <slot name="content"></slot>
+          </v-card-text>
           <v-card-actions class="mb-4" v-if="!loading">
             <v-layout row>
               <v-flex justify-center class="text-center">
