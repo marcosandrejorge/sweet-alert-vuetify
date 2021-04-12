@@ -1,8 +1,14 @@
 import Vue from 'vue';
-import Dev from './serve.vue';
-import vuetify from './plugins/vuetify'
+import Dev from './serve1.vue';
+import vuetify from './plugins/vuetify';
 import SweetAlertVuetify from '@/entry.esm';
-Vue.use(SweetAlertVuetify);
+Vue.use(
+  SweetAlertVuetify, 
+  vuetify,
+  // {
+  //   property: '$dialog' //this.$dialog() => default this.$swal()
+  // }
+);
 
 Vue.config.productionTip = false;
 

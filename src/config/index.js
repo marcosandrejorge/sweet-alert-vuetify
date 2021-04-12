@@ -145,7 +145,7 @@ const configDefaultError = {
 const configDefaultConfirm = {
     icon: "info",
     iconVisible: true,
-    title: "Info",
+    title: "Confirm",
     maxWidth: "500px",
     buttonCancel: {
         visible: true,
@@ -190,6 +190,24 @@ const configDefaultConfirm = {
     },
 };
 
+const configDefaultLoading = {
+    icon: "",
+    iconVisible: true,
+    title: "",
+    maxWidth: "500px",
+    buttonCancel: {},
+    buttonOk: {},
+    loading: {
+        text: 'Loading...',
+        style: {
+            size: 100,
+            color: 'primary',
+            width: '4',
+            indeterminate: true
+        }
+    },
+};
+
 const getDefault = (type) => {
     switch (type) {
         case "success":
@@ -198,6 +216,8 @@ const getDefault = (type) => {
             return configDefaultError;  
         case "confirm":
             return configDefaultConfirm;    
+        case "loading":
+            return configDefaultLoading;
         default:
             return configDefault;
     }
@@ -208,5 +228,6 @@ export {
     configDefaultSuccess,
     configDefaultError,
     configDefaultConfirm,
+    configDefaultLoading,
     getDefault,
 }

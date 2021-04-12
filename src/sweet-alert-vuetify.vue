@@ -9,18 +9,18 @@
       >
         <v-card>
           <v-card-text class="pb-0">
-            <div class="text-center" v-if="loading">
+            <div class="text-center" v-if="showLoading">
               <v-container fluid fill-height class="sweet-loader">
                   <v-layout align-center justify-center>
                       <v-flex>
                         <v-progress-circular
-                          v-bind="getConfigLoading.style"
+                          v-bind="configLoading.style"
                         ></v-progress-circular>
                       </v-flex>
                   </v-layout>
               </v-container>
             </div>
-            <div class="text-center" v-if="!loading">
+            <div class="text-center" v-if="!showLoading">
               <div class="svg-box" v-if="isSuccess">
                 <svg class="circular green-stroke">
                     <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
@@ -63,29 +63,29 @@
             </div>
           </v-card-text>
           <v-card-title class="justify-center">
-            <div v-if="!loading">{{ getTitle }}</div>
-            <div v-if="loading">{{ getConfigLoading.text }}</div>
+            <div v-if="!showLoading">{{ getTitle }}</div>
+            <div v-if="showLoading">{{ configLoading.text }}</div>
           </v-card-title>
           <v-card-text>
             <slot name="content"></slot>
           </v-card-text>
-          <v-card-actions class="mb-4" v-if="!loading">
+          <v-card-actions class="mb-4" v-if="!showLoading">
             <v-layout row>
               <v-flex justify-center class="text-center">
                 <v-btn
-                  v-if="getConfigButtonCancel.visible"
+                  v-if="configButtonCancel.visible"
                   v-bind="getStyleButtonCancel"
-                  @click="closeAlert(getConfigButtonCancel)"
+                  @click="closeAlert(configButtonCancel)"
                 >
-                  {{ getConfigButtonCancel.text }}
+                  {{ configButtonCancel.text }}
                 </v-btn>
                 
                 <v-btn
-                  v-if="getConfigButtonOk.visible"
+                  v-if="configButtonOk.visible"
                   v-bind="getStyleButtonOk"
-                  @click="closeAlert(getConfigButtonOk)"
+                  @click="closeAlert(configButtonOk)"
                 >
-                  {{ getConfigButtonOk.text }}
+                  {{ configButtonOk.text }}
                 </v-btn>
               </v-flex>
             </v-layout>
@@ -152,14 +152,21 @@ export default /*#__PURE__*/{
       default: () => {
         return configDefault;
       }
-    }
+    },
+    closeDestroy: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       dialog: false,
-      resolve: null,
-      reject: null,
       configDefault: configDefault,
+      configButtonOk: null,
+      configButtonCancel: null,
+      configLoading: null,
+      valueReturn: false,
+      showLoading: false,
     };
   },
   computed: {
@@ -175,32 +182,6 @@ export default /*#__PURE__*/{
     getMaxWidth() {
       return this.config?.maxWidth ?? this.configDefault.maxWidth;
     },
-    getConfigButtonCancel() {
-      return {
-        visible: this.config?.buttonCancel?.visible ?? this.configDefault.buttonCancel.visible,
-        text: this.config?.buttonCancel?.text ?? this.configDefault.buttonCancel.text,
-        valueReturn: this.config?.buttonCancel?.valueReturn ?? this.configDefault.buttonCancel.valueReturn,
-        close: this.config?.buttonCancel?.close ?? this.configDefault.buttonCancel.close,
-        emitEventClick: this.config?.buttonCancel?.emitEventClick ?? this.configDefault.buttonCancel.emitEventClick,
-        style: this.config?.buttonCancel?.style ?? this.configDefault.buttonCancel.style,
-      }
-    },
-    getConfigButtonOk() {
-      return {
-        visible: this.config?.buttonOk?.visible ?? this.configDefault.buttonOk.visible,
-        text: this.config?.buttonOk?.text ?? this.configDefault.buttonOk.text,
-        valueReturn: this.config?.buttonOk?.valueReturn ?? this.configDefault.buttonOk.valueReturn,
-        close: this.config?.buttonOk?.close ?? this.configDefault.buttonOk.close,
-        emitEventClick: this.config?.buttonOk?.emitEventClick ?? this.configDefault.buttonOk.emitEventClick,
-        style: this.config?.buttonOk?.style ?? this.configDefault.buttonOk.style,
-      }
-    },
-    getConfigLoading() {
-      return {
-        text: this.config?.loading?.text ?? this.configDefault.loading.text,
-        style: this.config?.loading?.style ?? this.configDefault.loading.style,
-      }
-    },
     isSuccess() {
       return this.getConfigIcon == "success" && this.getIconVisible;
     },
@@ -211,52 +192,109 @@ export default /*#__PURE__*/{
       return this.getConfigIcon == "info" && this.getIconVisible;
     },
     getStyleButtonCancel() {
-      let objStyle = {...this.getConfigButtonCancel.style};
-      objStyle["class"] += this.getConfigButtonOk.visible ? " mr-1" : "";
+      let objStyle = {...this.configButtonCancel.style};
+      objStyle["class"] += this.configButtonOk.visible ? " mr-1" : "";
       return objStyle;
     },
     getStyleButtonOk() {
-      let objStyle = {...this.getConfigButtonOk.style};
-      objStyle["class"] += this.getConfigButtonCancel.visible ? " ml-1" : "";
+      let objStyle = {...this.configButtonOk.style};
+      objStyle["class"] += this.configButtonCancel.visible ? " ml-1" : "";
       return objStyle;
     }
   },
   methods: {
+    setConfigButtonCancel() {
+      this.configButtonCancel = {
+        visible: this.config?.buttonCancel?.visible ?? this.configDefault.buttonCancel.visible,
+        text: this.config?.buttonCancel?.text ?? this.configDefault.buttonCancel.text,
+        valueReturn: this.config?.buttonCancel?.valueReturn ?? this.configDefault.buttonCancel.valueReturn,
+        close: this.config?.buttonCancel?.close ?? this.configDefault.buttonCancel.close,
+        emitEventClick: this.config?.buttonCancel?.emitEventClick ?? this.configDefault.buttonCancel.emitEventClick,
+        style: this.config?.buttonCancel?.style ?? this.configDefault.buttonCancel.style,
+      };
+    },
+    setConfigButtonOk() {
+      this.configButtonOk = {
+        visible: this.config?.buttonOk?.visible ?? this.configDefault.buttonOk.visible,
+        text: this.config?.buttonOk?.text ?? this.configDefault.buttonOk.text,
+        valueReturn: this.config?.buttonOk?.valueReturn ?? this.configDefault.buttonOk.valueReturn,
+        close: this.config?.buttonOk?.close ?? this.configDefault.buttonOk.close,
+        emitEventClick: this.config?.buttonOk?.emitEventClick ?? this.configDefault.buttonOk.emitEventClick,
+        style: this.config?.buttonOk?.style ?? this.configDefault.buttonOk.style,
+      }
+    },
+    setConfigLoading() {
+      this.configLoading = {
+        text: this.config?.loading?.text ?? this.configDefault.loading.text,
+        style: this.config?.loading?.style ?? this.configDefault.loading.style,
+      }
+    },
+    updateConfigAlert() {
+      this.setConfigButtonCancel();
+      this.setConfigButtonOk();
+      this.setConfigLoading();
+    },
     updateConfigDefault() {
       this.configDefault = {...getDefault(this.alertDefault)};
     },
-    updateModelSweet() {
-      this.modelSweet ? this.openAlert() : this.dialog = false;
+    updateLoading() {
+      this.showLoading = this.loading;
+      if (this.alertDefault === "loading") this.showLoading = true;
     },
     closeAlert(button) {
-      if (button?.close) {
-        this.dialog = false;
+      this.valueReturn = button?.valueReturn ?? false;
+      if (button?.emitEventClick) {
+        this.$emit(button.emitEventClick, this.valueReturn);
       }
-      this.resolve(button?.valueReturn);
-      this.$emit(button.emitEventClick, button.valueReturn);
-      this.$emit("change", button.valueReturn);
-      this.$emit("input", false);
+      this.$emit("change", this.valueReturn);
+      if (button?.close) {
+        this.$emit("input", false);
+        this.close();
+      }
     },
-    
     openAlert() {
       this.dialog = true;
       this.$emit("input", true);
-      return new Promise((resolve, reject) => {
-        this.resolve = resolve
-        this.reject = reject
-      });
+      document.addEventListener('keyup', this.onEnterPressed);
     },
+    onEnterPressed(e) {
+      if (e.keyCode === 13 && !this.showLoading) {
+        e.stopPropagation()
+        this.closeAlert(this.configButtonOk);
+      }
+    },
+    close() {
+      this.dialog = false;
+      document.removeEventListener('keyup', this.onEnterPressed);
+      //Vue.property.$swal => this.closeDestroy = true
+      if (this.closeDestroy) this.$destroy();
+    }
   },
   mounted() {
-    this.updateModelSweet();
+    this.updateLoading();
     this.updateConfigDefault();
+    this.updateConfigAlert();
+    if (this.modelSweet) this.openAlert();
+  },
+  destroyed() {
+    //For Vue.property destroy remove event
+    document.removeEventListener('keyup', this.onEnterPressed);
   },
   watch: {
     modelSweet() {
-      this.updateModelSweet();
+      this.modelSweet ? this.openAlert() : this.close();
     },
     alertDefault() {
       this.updateConfigDefault();
+    },
+    config: {
+      handler: function() {
+        this.updateConfigAlert();
+      },
+      deep: true,
+    },
+    loading() {
+      this.updateLoading();
     }
   }
 };
