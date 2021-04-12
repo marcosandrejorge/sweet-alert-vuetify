@@ -1,20 +1,17 @@
-### Install
+## Install
 
 
 ```js
 npm install sweet-alert-vuetify --save
 
-import SweetAlertVuetify from 'sweet-alert-vuetify';
-Vue.use(SweetAlertVuetify);
-
-or
-
-import SweetAlertVuetify from 'sweet-alert-vuetify';
-components: { SweetAlertVuetify }
-
 ```
 
-### Use
+## Use
+
+```js
+import SweetAlertVuetify from 'sweet-alert-vuetify';
+components: { SweetAlertVuetify }
+```
 
 ```html
 <sweet-alert-vuetify
@@ -29,6 +26,27 @@ components: { SweetAlertVuetify }
     }
   }"
 />
+```
+
+### OR
+
+```js
+import SweetAlertVuetify from 'sweet-alert-vuetify';
+Vue.use(SweetAlertVuetify, vuetify);
+
+```
+
+### Use
+
+```js
+async showAlert() {
+  await this.$swal('confirm', {
+    title: 'Deseja realmente continuar?',
+    buttonCancel: {
+      text: 'Cancelar'
+    }
+  }
+});
 ```
 
 ## Props
