@@ -50,3 +50,7 @@ async showAlert() {
 ```
 
 ## Props
+
+## Thanks to:
+
+- https://github.com/yariksav/vuetify-confirm
