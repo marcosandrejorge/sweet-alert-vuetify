@@ -52,5 +52,5 @@ async showAlert() {
 ## Props
 
 ## Thanks to:
-
+- https://github.com/sweetalert2/sweetalert2
 - https://github.com/yariksav/vuetify-confirm
