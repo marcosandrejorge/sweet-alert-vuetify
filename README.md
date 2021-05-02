@@ -54,7 +54,7 @@ async showAlert() {
 //vue.config.js
 module.exports = {
   transpileDependencies: ["vuetify"],
-  transpileDependencies: ["plugin-tigre-sweet-alert-vuetify"],
+  transpileDependencies: ["sweet-alert-vuetify"],
 };
 ```
 
