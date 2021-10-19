@@ -18,6 +18,12 @@ export default{
   methods: {
     finish($event) {
       console.log('Event change =>', $event);
+      this.config = {
+        title: "",
+        loading: {
+          text: "Aguarde..."
+        },
+      };
     },
     save() {
       this.config.title = "Registro salvo com sucesso";
@@ -29,8 +35,14 @@ export default{
       }, 5000);
     },
     cancel() {
-      this.config.title = "Ocorreu um erro ao tentar salvar o registro";
+      this.config.title = "Ocorreu um erro ao tentar salvar o registro. Ocorreu um erro ao tentar salvar o registro. Ocorreu um erro ao tentar salvar o registro.";
       this.alertDefault = "error";
+      this.config.buttonOk = {
+        style: {
+          width: "50%",
+          color: "error",
+        }
+      }
       this.loading = true;
       this.showAlert = true;
       setTimeout(() => {

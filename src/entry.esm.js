@@ -17,7 +17,7 @@ export default /*#__PURE__*/(() => {
     const property = optionsUse.property || '$swal';
     const Ctor = Vue.extend(Object.assign({ vuetify }, SweetAlertVuetify));
     let cmp;
-    function createDialogCmp(options) {
+    function createSweetAlertVuetify(options) {
       cmp?.close();
       const container = document.querySelector('[data-app=true]') || document.body
       return new Promise(resolve => {
@@ -33,7 +33,7 @@ export default /*#__PURE__*/(() => {
     }
 
     function open(alertDefault, config = {}) {
-      return createDialogCmp({
+      return createSweetAlertVuetify({
         alertDefault,
         config,
         closeDestroy: true,

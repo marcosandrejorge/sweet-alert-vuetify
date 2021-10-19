@@ -6,6 +6,7 @@
         v-model="dialog"
         persistent
         :max-width="getMaxWidth"
+        :class="getClass"
       >
         <v-card>
           <v-card-text class="pb-0">
@@ -63,11 +64,13 @@
             </div>
           </v-card-text>
           <v-card-title class="justify-center">
-            <div v-if="!showLoading">{{ getTitle }}</div>
+            <div v-if="!showLoading" class="text-center" style="word-break:normal;">{{ getTitle }}</div>
             <div v-if="showLoading">{{ configLoading.text }}</div>
           </v-card-title>
-          <v-card-text>
-            <slot name="content"></slot>
+          <v-card-text class="text-center">
+            <slot name="content">
+              <p class="body-2" style="word-break:normal;" v-if="getSubtitle !== ''">{{ getSubtitle }}</p>
+            </slot>
           </v-card-text>
           <v-card-actions class="mb-4" v-if="!showLoading">
             <v-layout row>
@@ -179,8 +182,14 @@ export default /*#__PURE__*/{
     getTitle() {
       return this.config?.title ?? this.configDefault.title;
     },
+    getSubtitle() {
+      return this.config?.subtitle ?? this.configDefault.subtitle;
+    },
     getMaxWidth() {
       return this.config?.maxWidth ?? this.configDefault.maxWidth;
+    },
+    getClass() {
+      return this.config?.class ?? this.configDefault.class;
     },
     isSuccess() {
       return this.getConfigIcon == "success" && this.getIconVisible;
@@ -275,10 +284,6 @@ export default /*#__PURE__*/{
     this.updateConfigDefault();
     this.updateConfigAlert();
     if (this.modelSweet) this.openAlert();
-  },
-  destroyed() {
-    //For Vue.property destroy remove event
-    document.removeEventListener('keyup', this.onEnterPressed);
   },
   watch: {
     modelSweet() {

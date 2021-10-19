@@ -8,6 +8,9 @@ export default{
     async showAlert() {
       let confirm = await this.$swal('confirm', {
         title: 'Deseja realmente continuar?',
+        buttonCancel: {
+          text: 'Cancelar'
+        },
         buttonOk: {
           valueReturn: "1"//Default true
         }
@@ -21,7 +24,8 @@ export default{
       });
       setTimeout(() => {
         this.$swal('success', {
-          title: 'Registro salvo com sucesso!'
+          title: 'Registro salvo com sucesso!',
+          subtitle: 'O registro foi salvo com o código: 498'
         });
       }, 3000);
     }

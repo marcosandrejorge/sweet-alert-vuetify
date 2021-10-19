@@ -3,6 +3,7 @@ const configDefault = {
     iconVisible: true,
     title: "Default",
     maxWidth: "500px",
+    class: "",
     buttonCancel: {
         visible: true,
         text: "Cancel",
@@ -51,6 +52,7 @@ const configDefaultSuccess = {
     iconVisible: true,
     title: "Success",
     maxWidth: "500px",
+    class: "",
     buttonCancel: {
         visible: false,
         text: "Cancel",
@@ -99,6 +101,7 @@ const configDefaultError = {
     iconVisible: true,
     title: "Error",
     maxWidth: "500px",
+    class: "",
     buttonCancel: {
         visible: false,
         text: "Cancel",
@@ -147,6 +150,7 @@ const configDefaultConfirm = {
     iconVisible: true,
     title: "Confirm",
     maxWidth: "500px",
+    class: "",
     buttonCancel: {
         visible: true,
         text: "Cancel",
@@ -195,6 +199,7 @@ const configDefaultLoading = {
     iconVisible: true,
     title: "",
     maxWidth: "500px",
+    class: "",
     buttonCancel: {},
     buttonOk: {},
     loading: {
