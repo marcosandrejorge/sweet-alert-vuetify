@@ -79,6 +79,30 @@ async showAlert() {
       },
     },
   });
+
+  this.$swal("loading", {
+    config: {
+      loading: {
+        text: "Salvando...",
+      },
+    },
+  });
+
+  this.$swal("success", {
+    config: {
+      title: {
+        text: "Registro salvo com sucesso!",
+      },
+    },
+  });
+
+  this.$swal("error", {
+    config: {
+      title: {
+        text: "Ocorreu algum problema ao salvar os dados.",
+      },
+    },
+  });
 });
 ```
 
