@@ -5,6 +5,7 @@
         v-if="dialog"
         v-model="dialog"
         persistent
+        :hide-overlay="hideOverlay"
         :max-width="getMaxWidth"
         :class="getClass"
       >
@@ -23,10 +24,10 @@
             </div>
             <div class="text-center" v-if="!showLoading">
               <div class="svg-box" v-if="isSuccess">
-                <svg class="circular green-stroke">
+                <svg class="circular green-stroke" :class="getIconClass">
                     <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
                 </svg>
-                <svg class="checkmark green-stroke">
+                <svg class="checkmark green-stroke" :class="getIconClass">
                     <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
                       <path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53"/>
                     </g>
@@ -34,10 +35,10 @@
               </div>
 
               <div class="svg-box" v-if="isError">
-                  <svg class="circular red-stroke">
+                  <svg class="circular red-stroke" :class="getIconClass">
                       <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
                   </svg>
-                  <svg class="cross red-stroke">
+                  <svg class="cross red-stroke" :class="getIconClass">
                       <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)">
                           <path class="first-line" d="M634.087,300.805L673.361,261.53" fill="none"/>
                       </g>
@@ -47,10 +48,10 @@
                   </svg>
               </div>
               <div class="svg-box" v-if="isInfo">
-                  <svg class="circular yellow-stroke">
+                  <svg class="circular yellow-stroke" :class="getIconClass">
                       <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10"/>
                   </svg>
-                  <svg class="alert-sign yellow-stroke">
+                  <svg class="alert-sign yellow-stroke" :class="getIconClass">
                       <g transform="matrix(1,0,0,1,-615.516,-257.346)">
                           <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
                               <path class="line" d="M634.087,300.805L673.361,261.53" fill="none"/>
@@ -63,8 +64,8 @@
               </div>
             </div>
           </v-card-text>
-          <v-card-title class="justify-center">
-            <div v-if="!showLoading" class="text-center" style="word-break:normal;">{{ getTitle }}</div>
+          <v-card-title class="justify-center" v-if="configTitle.visible">
+            <div v-if="!showLoading"><slot name="title"><p v-bind="configTitle.style">{{ configTitle.text }}</p></slot></div>
             <div v-if="showLoading">{{ configLoading.text }}</div>
           </v-card-title>
           <v-card-text class="text-center">
@@ -160,6 +161,10 @@ export default /*#__PURE__*/{
       type: Boolean,
       default: false,
     },
+    hideOverlay: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -168,6 +173,7 @@ export default /*#__PURE__*/{
       configButtonOk: null,
       configButtonCancel: null,
       configLoading: null,
+      configTitle: null,
       valueReturn: false,
       showLoading: false,
     };
@@ -179,8 +185,8 @@ export default /*#__PURE__*/{
     getIconVisible() {
       return this.config?.iconVisible ?? this.configDefault.iconVisible;
     },
-    getTitle() {
-      return this.config?.title ?? this.configDefault.title;
+    getIconClass() {
+      return this.config?.iconClass ?? this.configDefault.iconClass;
     },
     getSubtitle() {
       return this.config?.subtitle ?? this.configDefault.subtitle;
@@ -238,10 +244,18 @@ export default /*#__PURE__*/{
         style: this.config?.loading?.style ?? this.configDefault.loading.style,
       }
     },
+    setConfigTitle() {
+      this.configTitle = {
+        text: this.config?.title?.text ?? this.configDefault.title.text,
+        visible: this.config?.title?.visible ?? this.configDefault.title.visible,
+        style: this.config?.title?.style ?? this.configDefault.title.style,
+      }
+    },
     updateConfigAlert() {
       this.setConfigButtonCancel();
       this.setConfigButtonOk();
       this.setConfigLoading();
+      this.setConfigTitle();
     },
     updateConfigDefault() {
       this.configDefault = {...getDefault(this.alertDefault)};

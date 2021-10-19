@@ -35,9 +35,10 @@ export default /*#__PURE__*/(() => {
     function open(alertDefault, config = {}) {
       return createSweetAlertVuetify({
         alertDefault,
-        config,
-        closeDestroy: true,
-        modelSweet: true
+        config: config.config,
+        closeDestroy: config?.closeDestroy ?? true,
+        modelSweet: config?.modelSweet ?? true,
+        hideOverlay: config?.hideOverlay ?? false,
       });
     };
 
