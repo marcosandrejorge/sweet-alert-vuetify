@@ -65,7 +65,11 @@
             </div>
           </v-card-text>
           <v-card-title class="justify-center" v-if="configTitle.visible">
-            <div v-if="!showLoading"><slot name="title"><p v-bind="configTitle.style">{{ configTitle.text }}</p></slot></div>
+            <div v-if="!showLoading">
+              <slot name="title">
+                <p v-bind="configTitle.style">{{ configTitle.text }}</p>
+              </slot>
+            </div>
             <div v-if="showLoading">{{ configLoading.text }}</div>
           </v-card-title>
           <v-card-text class="text-center">

@@ -11,9 +11,11 @@ export default {
         config: {
           iconVisible: false,
           title: {
-            text: "Você tem certeza que deseja continuar?",
+            text: "Você tem certeza que deseja continuar Você tem certeza que deseja continuar Você tem certeza que deseja continuar?",
             style: {
+              class: "text-center",
               style: {
+                wordBreak: "normal",
                 fontSize: "12px",
                 color: "red",
               },

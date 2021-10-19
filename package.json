@@ -1,6 +1,6 @@
 {
   "name": "sweet-alert-vuetify",
-  "version": "1.2.0",
+  "version": "1.2.5",
   "description": "",
   "main": "dist/sweet-alert-vuetify.ssr.js",
   "browser": "dist/sweet-alert-vuetify.esm.js",
