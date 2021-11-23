@@ -67,14 +67,14 @@
           <v-card-title class="justify-center" v-if="configTitle.visible">
             <div v-if="!showLoading">
               <slot name="title">
-                <p v-bind="configTitle.style">{{ configTitle.text }}</p>
+                <p v-bind="configTitle.style" v-html="configTitle.text"></p>
               </slot>
             </div>
             <div v-if="showLoading">{{ configLoading.text }}</div>
           </v-card-title>
           <v-card-text class="text-center">
             <slot name="content">
-              <p class="body-2" style="word-break:normal;" v-if="getSubtitle !== ''">{{ getSubtitle }}</p>
+              <p class="body-2" style="word-break:normal;" v-if="getSubtitle !== ''" v-html="getSubtitle"></p>
             </slot>
           </v-card-text>
           <v-card-actions class="mb-4" v-if="!showLoading">
