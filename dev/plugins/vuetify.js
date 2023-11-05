@@ -1,8 +1,7 @@
 import { createVuetify } from 'vuetify'
 import colors from 'vuetify/lib/util/colors'
-import 'vuetify/styles'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
-import '@mdi/font/css/materialdesignicons.css'
 import {
   VRow,
   VDialog,
@@ -38,7 +37,11 @@ const components = {
 const vuetify = createVuetify({
   components,
   icons: {
-    iconfont: 'mdi',
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi,
+    },
   },
   theme: {
     themes: {

@@ -3,6 +3,8 @@ import Dev from './serve1.vue';
 import vuetify from './plugins/vuetify';
 import SweetAlertVuetify from '@/entry.esm';
 
+import 'vuetify/styles'
+
 const app = createApp(Dev);
 app.use(vuetify);
 app.use(SweetAlertVuetify, vuetify);
