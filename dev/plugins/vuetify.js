@@ -1,14 +1,83 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-import '@mdi/font/css/materialdesignicons.css'
+import { createVuetify } from 'vuetify'
+import colors from 'vuetify/lib/util/colors'
+import 'vuetify/styles'
 
-Vue.use(Vuetify, {
-    icons: {
-        iconfont: 'mdi',
+import '@mdi/font/css/materialdesignicons.css'
+import {
+  VRow,
+  VDialog,
+  VBtn,
+  VCard,
+  VCardTitle,
+  VCardText,
+  VCardActions,
+  VSpacer,
+  VLayout,
+  VProgressCircular,
+  VContainer,
+  VMain,
+  VApp
+} from "vuetify/components";
+
+const components = {
+  VRow,
+  VDialog,
+  VBtn,
+  VCard,
+  VCardTitle,
+  VCardText,
+  VCardActions,
+  VSpacer,
+  VLayout,
+  VProgressCircular,
+  VContainer,
+  VMain,
+  VApp
+}
+
+const vuetify = createVuetify({
+  components,
+  icons: {
+    iconfont: 'mdi',
+  },
+  theme: {
+    themes: {
+      light: {
+        colors: {
+          primary: colors.blue.darken2,
+          secondary: colors.grey.darken3,
+          accent: colors.blue.accent1,
+          error: colors.red.accent2,
+          info: colors.blue.base,
+          success: colors.green.base,
+          warning: colors.orange.darken1,
+        },
+      },
+      dark: {
+        colors: {
+          primary: colors.blue.base,
+          secondary: colors.grey.darken3,
+          accent: colors.pink.accent1,
+          error: colors.red.accent2,
+          info: colors.blue.base,
+          success: colors.green.base,
+          warning: colors.orange.darken1,
+        },
+      },
+    },
+  },
+  defaults: {
+    VBtn: {
+      variant: 'flat',
+    },
+    VCardActions: {
+      VBtn: {
+        variant: 'flat',
+      }
     }
+  }
 })
 
-const opts = {}
+export { components }
 
-export default new Vuetify(opts)
+export default vuetify

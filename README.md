@@ -31,8 +31,11 @@ components: { SweetAlertVuetify }
 ### OR
 
 ```js
+import { createApp } from 'vue';
 import SweetAlertVuetify from 'sweet-alert-vuetify';
-Vue.use(SweetAlertVuetify, vuetify);
+
+app.use(SweetAlertVuetify, vuetify);
+app.use(vuetify);
 
 ```
 
@@ -56,10 +59,8 @@ async showAlert() {
       buttonCancel: {
         text: "Não, voltar",
         style: {
-          text: false,
           color: "#687CEA",
-          class: "white--text",
-          depressed: true,
+          class: "text-white",
           width: "30%",
           maxWidth: "400px",
           rounded: true,
@@ -68,10 +69,9 @@ async showAlert() {
       buttonOk: {
         text: "Sim, continuar",
         style: {
-          text: false,
           color: "#687CEA",
-          class: "white--text",
-          depressed: true,
+          class: "text-white",
+          variant: "flat",
           width: "40%",
           maxWidth: "400px",
           rounded: true,

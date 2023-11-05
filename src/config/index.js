@@ -8,7 +8,7 @@ const configDefault = {
         visible: true,
         text: "Default",
         style: {
-            class: "",
+            class: "text-center",
             style: ""
         },
     },
@@ -19,10 +19,8 @@ const configDefault = {
         close: true,
         emitEventClick: "clickButtonCancel",
         style: {
-            text: false,
             color: "error",
             class: "",
-            depressed: true,
             width: "30%",
             maxWidth: "200px",
             minWidth: "100px",
@@ -35,21 +33,20 @@ const configDefault = {
         close: true,
         emitEventClick: "clickButtonOk",
         style: {
-            text: false,
             color: "primary",
             class: "",
-            depressed: true,
             width: "30%",
             maxWidth: "200px",
             minWidth: "100px",
         },
     },
     loading: {
-        text: 'Loading...',
+        text: "Loading...",
         style: {
+            class: "text-center",
             size: 100,
-            color: 'primary',
-            width: '4',
+            color: "primary",
+            width: "4",
             indeterminate: true
         }
     },
@@ -63,7 +60,7 @@ const configDefaultSuccess = {
         visible: true,
         text: "Success",
         style: {
-            class: "",
+            class: "text-center",
             style: ""
         },
     },
@@ -76,10 +73,8 @@ const configDefaultSuccess = {
         close: true,
         emitEventClick: "clickButtonCancel",
         style: {
-            text: false,
             color: "error",
             class: "",
-            depressed: true,
             width: "30%",
             maxWidth: "200px",
             minWidth: "100px",
@@ -92,21 +87,20 @@ const configDefaultSuccess = {
         close: true,
         emitEventClick: "clickButtonOk",
         style: {
-            text: false,
-            color: "green darken-1",
+            color: "green-darken-1",
             class: "white--text",
-            depressed: true,
             width: "20%",
             maxWidth: "200px",
             minWidth: "100px",
         },
     },
     loading: {
-        text: 'Loading...',
+        text: "Loading...",
         style: {
+            class: "text-center",
             size: 100,
-            color: 'primary',
-            width: '4',
+            color: "primary",
+            width: "4",
             indeterminate: true
         }
     },
@@ -120,7 +114,7 @@ const configDefaultError = {
         visible: true,
         text: "Error",
         style: {
-            class: "",
+            class: "text-center",
             style: ""
         },
     },
@@ -133,10 +127,8 @@ const configDefaultError = {
         close: true,
         emitEventClick: "clickButtonCancel",
         style: {
-            text: false,
             color: "error",
             class: "",
-            depressed: true,
             width: "30%",
             maxWidth: "200px",
             minWidth: "100px",
@@ -149,21 +141,20 @@ const configDefaultError = {
         close: true,
         emitEventClick: "clickButtonOk",
         style: {
-            text: false,
             color: "error",
             class: "",
-            depressed: true,
             width: "20%",
             maxWidth: "200px",
             minWidth: "100px",
         },
     },
     loading: {
-        text: 'Loading...',
+        text: "Loading...",
         style: {
+            class: "text-center",
             size: 100,
-            color: 'primary',
-            width: '4',
+            color: "primary",
+            width: "4",
             indeterminate: true
         }
     },
@@ -177,7 +168,7 @@ const configDefaultConfirm = {
         visible: true,
         text: "Confirm",
         style: {
-            class: "",
+            class: "text-center",
             style: ""
         },
     },
@@ -190,10 +181,8 @@ const configDefaultConfirm = {
         close: true,
         emitEventClick: "clickButtonCancel",
         style: {
-            text: false,
             color: "error",
             class: "",
-            depressed: true,
             width: "30%",
             maxWidth: "200px",
             minWidth: "100px",
@@ -206,21 +195,20 @@ const configDefaultConfirm = {
         close: true,
         emitEventClick: "clickButtonOk",
         style: {
-            text: false,
             color: "primary",
             class: "",
-            depressed: true,
             width: "20%",
             maxWidth: "200px",
             minWidth: "100px",
         },
     },
     loading: {
-        text: 'Loading...',
+        text: "Loading...",
         style: {
+            class: "text-center",
             size: 100,
-            color: 'primary',
-            width: '4',
+            color: "primary",
+            width: "4",
             indeterminate: true
         }
     },
@@ -234,7 +222,7 @@ const configDefaultLoading = {
         visible: true,
         text: "",
         style: {
-            class: "",
+            class: "text-center",
             style: ""
         },
     },
@@ -243,11 +231,12 @@ const configDefaultLoading = {
     buttonCancel: {},
     buttonOk: {},
     loading: {
-        text: 'Loading...',
+        text: "Loading...",
         style: {
+            class: "text-center",
             size: 100,
-            color: 'primary',
-            width: '4',
+            color: "primary",
+            width: "4",
             indeterminate: true
         }
     },
@@ -258,9 +247,9 @@ const getDefault = (type) => {
         case "success":
             return configDefaultSuccess;
         case "error":
-            return configDefaultError;  
+            return configDefaultError;
         case "confirm":
-            return configDefaultConfirm;    
+            return configDefaultConfirm;
         case "loading":
             return configDefaultLoading;
         default:
