@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row justify="center" class="mt-10">
-      <v-dialog v-if="dialog" v-model="dialog" persistent :hide-overlay="hideOverlay" :max-width="getMaxWidth"
+      <v-dialog v-if="dialog" v-model="dialog" persistent :hide-overlay="hideOverlay || null" :max-width="getMaxWidth"
         :class="getClass">
         <v-card>
           <v-card-text class="pb-0">
@@ -122,7 +122,7 @@ export default defineComponent({
     },
     hideOverlay: {
       type: Boolean,
-      default: false,
+      default: null,
     },
   },
   setup(props, { emit }) {
@@ -233,7 +233,7 @@ export default defineComponent({
       } 
     }
     const openAlert = () => {
-      emit("input:modelValue", true);
+      emit("open", true);
       document.addEventListener('keyup', onEnterPressed);
     }
     const onEnterPressed = (e) => {

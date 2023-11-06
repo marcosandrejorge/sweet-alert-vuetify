@@ -1,15 +1,20 @@
+# SweetAlertVuetify - Vue 3.x
+
+> This version supports **only** Vue 3 with Vuetify 3 versions. If you need Vue 2 support, please consider using this package [sweet-alert-vuetify](https://www.npmjs.com/package/sweet-alert-vuetify).
+
 ## Install
 
 
 ```js
 npm install sweet-alert-vuetify --save
-
+yarn add sweet-alert-vuetify --dev
 ```
 
 ## Use
 
 ```js
 import SweetAlertVuetify from 'sweet-alert-vuetify';
+
 components: { SweetAlertVuetify }
 ```
 
@@ -20,7 +25,9 @@ components: { SweetAlertVuetify }
   @clickButtonCancel="cancel()"
   alertDefault="confirm"
   :config="{
-    title: 'Deseja realmente continuar?',
+    title: {
+      text: 'Deseja realmente continuar?'
+    },
     buttonCancel: {
       text: 'Cancelar'
     }
@@ -115,6 +122,8 @@ module.exports = {
 ```
 
 ## Props
+- [Vue 3 Migration Guide](https://v3-migration.vuejs.org/)
+- [Vuetify 3 Upgrade Guide](https://vuetifyjs.com/en/getting-started/upgrade-guide/)
 
 ## Thanks to:
 - https://github.com/sweetalert2/sweetalert2
