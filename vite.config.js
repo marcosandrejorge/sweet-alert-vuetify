@@ -6,12 +6,14 @@ import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
-
+import browserslistToEsbuild from 'browserslist-to-esbuild'
 
 import { peerDependencies } from "./package.json";
 
 const buildFormat = process.env.BUILD_FORMAT || 'es';
 const port = process.env.PORT || 8080
+
+const isBuildFormatESM = buildFormat === 'es'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -46,20 +48,22 @@ export default defineConfig({
     port,
   },
   build: {
-    ssr: buildFormat === 'ssr',
     outDir: 'dist',
     emptyOutDir: false,
-    minify: buildFormat !== 'es',
+    minify: !isBuildFormatESM,
     cssMinify: true,
+    target: browserslistToEsbuild(),
+    lib: {
+      entry: isBuildFormatESM ? 'src/entry.esm.js' : 'src/entry.js',
+      formats: [buildFormat],
+      name: 'SweetAlertVuetify',
+      fileName: (format) => `sweet-alert-vuetify.${format}.js`,
+    },
     rollupOptions: {
       external: [...Object.keys(peerDependencies)],
-      input: buildFormat === 'es' ? 'src/entry.esm.js' : 'src/entry.js',
       output: {
-        compact: buildFormat !== 'es',
-        name: 'SweetAlertVuetify',
-        exports: buildFormat === 'es' ? 'named' : 'auto',
-        format: buildFormat === 'ssr' ? 'es' : buildFormat,
-        entryFileNames: `sweet-alert-vuetify.${buildFormat}.js`,
+        compact: true,
+        exports: isBuildFormatESM ? 'named' : 'auto',
         globals: {
           vue: 'Vue',
           vuetify: 'Vuetify'
