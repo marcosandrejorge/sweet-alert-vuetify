@@ -1,6 +1,6 @@
 import { createApp, h } from 'vue';
 
-import SweetAlertVuetify from '@/sweet-alert-vuetify.vue';
+import SweetAlertVuetify from './sweet-alert-vuetify.vue';
 export { SweetAlertVuetify };
 
 // Default export is installable instance of component.
