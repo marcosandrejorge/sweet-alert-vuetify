@@ -10,7 +10,8 @@
     ".": {
       "import": "./dist/sweet-alert-vuetify.es.js",
       "require": "./dist/sweet-alert-vuetify.cjs.js"
-    }
+    },
+    "./lib": "./src/entry.esm.js"
   },
   "author": "Marcos André Jorge <https://github.com/marcosandrejorge/>",
   "license": "MIT",

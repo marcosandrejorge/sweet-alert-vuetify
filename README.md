@@ -13,7 +13,9 @@ yarn add sweet-alert-vuetify --dev
 ## Use
 
 ```js
-import SweetAlertVuetify from 'sweet-alert-vuetify';
+import { SweetAlertVuetify } from 'sweet-alert-vuetify';
+// or
+import { SweetAlertVuetify } from 'sweet-alert-vuetify/lib'; // uncompiled version
 
 components: { SweetAlertVuetify }
 ```
@@ -40,6 +42,8 @@ components: { SweetAlertVuetify }
 ```js
 import { createApp } from 'vue';
 import SweetAlertVuetify from 'sweet-alert-vuetify';
+// or
+import SweetAlertVuetify from 'sweet-alert-vuetify/lib'; // uncompiled version
 
 app.use(SweetAlertVuetify, vuetify);
 app.use(vuetify);
