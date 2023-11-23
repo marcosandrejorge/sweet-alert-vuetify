@@ -26,7 +26,11 @@ export default{
       };
     },
     save() {
-      this.config.title = "Registro salvo com sucesso";
+      this.config = {
+        title: {
+          text: "Registro salvo com sucesso"
+        }
+      };
       this.alertDefault = "success";
       this.loading = true;
       this.showAlert = true;
@@ -35,7 +39,11 @@ export default{
       }, 5000);
     },
     cancel() {
-      this.config.title = "Ocorreu um erro ao tentar salvar o registro. Ocorreu um erro ao tentar salvar o registro. Ocorreu um erro ao tentar salvar o registro.";
+      this.config = {
+        title: {
+          text:  "Ocorreu um erro ao tentar salvar o registro. Ocorreu um erro ao tentar salvar o registro. Ocorreu um erro ao tentar salvar o registro."
+        }
+      };
       this.alertDefault = "error";
       this.config.buttonOk = {
         style: {
@@ -65,14 +73,16 @@ export default{
       </v-btn>
       <sweet-alert-vuetify
         v-model="showConfirm"
-        @clickButtonOk="save()"
-        @clickButtonCancel="cancel()"
+        @clickButtonOk="save"
+        @clickButtonCancel="cancel"
         alertDefault="confirm"
         :config="{
-          title: 'Deseja realmente continuar?',
+          title: {
+            text: 'Deseja realmente continuar?'
+          },
           buttonCancel: {
             text: 'Cancelar'
-          }
+          },
         }"
       />
       <sweet-alert-vuetify

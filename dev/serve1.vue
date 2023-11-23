@@ -15,7 +15,6 @@ export default {
             style: {
               class: "text-center",
               style: {
-                wordBreak: "normal",
                 fontSize: "12px",
                 color: "red",
               },
@@ -24,10 +23,7 @@ export default {
           buttonCancel: {
             text: "Não, voltar",
             style: {
-              text: false,
               color: "#687CEA",
-              class: "white--text",
-              depressed: true,
               width: "30%",
               maxWidth: "400px",
               rounded: true,
@@ -36,10 +32,7 @@ export default {
           buttonOk: {
             text: "Sim, continuar",
             style: {
-              text: false,
               color: "#687CEA",
-              class: "white--text",
-              depressed: true,
               width: "40%",
               maxWidth: "400px",
               rounded: true,
@@ -71,7 +64,7 @@ export default {
 </script>
 
 <template>
-  <v-app id="app">
+  <v-app id="app" style="max-height: 50vh;">
     <v-main>
       <v-btn color="primary" dark @click="showAlert"> Salvar </v-btn>
     </v-main>

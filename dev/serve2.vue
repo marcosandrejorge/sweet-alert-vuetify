@@ -1,5 +1,6 @@
 <script>
-export default{
+import { SweetAlertVuetify } from '@/entry.esm';
+export default {
   name: 'ServeDev',
   data() {
     return {
@@ -9,13 +10,15 @@ export default{
       config: null,
     }
   },
+  components: {
+    SweetAlertVuetify
+  },
   methods: {
     init() {
-      this.showAlert = false,
-      this.loading = false,
-      this.alertDefault = "",
+      this.showAlert = false;
+      this.loading = false;
+      this.alertDefault = "";
       this.config = {
-        title: "",
         loading: {
           text: "Aguarde..."
         },
@@ -24,7 +27,7 @@ export default{
     },
     showConfirm() {
       this.alertDefault = "confirm";
-      this.config.title = "Deseja realmente continuar?";
+      this.config.title = { text: "Deseja realmente continuar?" };
       this.config.buttonOk = {
         close: false,
         emitEventClick: "okConfirm"
@@ -35,7 +38,7 @@ export default{
       this.loading = true;
       setTimeout(() => {
         this.alertDefault = "success";
-        this.config.title = "Registro salvo com sucesso!";
+        this.config.title = { text: "Registro salvo com sucesso!" };
         this.config.buttonOk = {
           close: true,
           emitEventClick: "finishSaveItem"
@@ -53,14 +56,10 @@ export default{
 <template>
   <v-app id="app">
     <v-main>
-      <v-btn
-        color="primary"
-        dark
-        @click="showConfirm"
-      >
+      <v-btn color="primary" dark @click="showConfirm">
         Salvar
       </v-btn>
-      <sweet-alert-vuetify
+      <SweetAlertVuetify
         v-model="showAlert"
         @okConfirm="saveItem"
         @finishSaveItem="init"

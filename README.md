@@ -1,15 +1,22 @@
+# SweetAlertVuetify - Vue 3.x
+
+> This version supports **only** Vue 3 with Vuetify 3 versions. If you need Vue 2 support, please consider using this package [sweet-alert-vuetify](https://www.npmjs.com/package/sweet-alert-vuetify).
+
 ## Install
 
 
 ```js
 npm install sweet-alert-vuetify --save
-
+yarn add sweet-alert-vuetify --dev
 ```
 
 ## Use
 
 ```js
-import SweetAlertVuetify from 'sweet-alert-vuetify';
+import { SweetAlertVuetify } from 'sweet-alert-vuetify';
+// or
+import { SweetAlertVuetify } from 'sweet-alert-vuetify/lib'; // uncompiled version
+
 components: { SweetAlertVuetify }
 ```
 
@@ -20,7 +27,9 @@ components: { SweetAlertVuetify }
   @clickButtonCancel="cancel()"
   alertDefault="confirm"
   :config="{
-    title: 'Deseja realmente continuar?',
+    title: {
+      text: 'Deseja realmente continuar?'
+    },
     buttonCancel: {
       text: 'Cancelar'
     }
@@ -31,8 +40,13 @@ components: { SweetAlertVuetify }
 ### OR
 
 ```js
+import { createApp } from 'vue';
 import SweetAlertVuetify from 'sweet-alert-vuetify';
-Vue.use(SweetAlertVuetify, vuetify);
+// or
+import SweetAlertVuetify from 'sweet-alert-vuetify/lib'; // uncompiled version
+
+app.use(SweetAlertVuetify, vuetify);
+app.use(vuetify);
 
 ```
 
@@ -56,10 +70,8 @@ async showAlert() {
       buttonCancel: {
         text: "Não, voltar",
         style: {
-          text: false,
           color: "#687CEA",
-          class: "white--text",
-          depressed: true,
+          class: "text-white",
           width: "30%",
           maxWidth: "400px",
           rounded: true,
@@ -68,10 +80,9 @@ async showAlert() {
       buttonOk: {
         text: "Sim, continuar",
         style: {
-          text: false,
           color: "#687CEA",
-          class: "white--text",
-          depressed: true,
+          class: "text-white",
+          variant: "flat",
           width: "40%",
           maxWidth: "400px",
           rounded: true,
@@ -115,6 +126,8 @@ module.exports = {
 ```
 
 ## Props
+- [Vue 3 Migration Guide](https://v3-migration.vuejs.org/)
+- [Vuetify 3 Upgrade Guide](https://vuetifyjs.com/en/getting-started/upgrade-guide/)
 
 ## Thanks to:
 - https://github.com/sweetalert2/sweetalert2
