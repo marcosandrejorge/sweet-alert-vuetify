@@ -31,7 +31,8 @@
   ],
   "files": [
     "dist/*",
-    "src/**/*.vue"
+    "src/*",
+    "dev/plugins/*"
   ],
   "sideEffects": false,
   "scripts": {
@@ -63,7 +64,7 @@
     "vuetify": "^3.3.23"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "type": "module"
 }
